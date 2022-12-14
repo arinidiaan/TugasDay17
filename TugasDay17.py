@@ -9,7 +9,7 @@ class TestElements(unittest.TestCase):
     def setUp(self): 
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
         
-    def a_redirect_banner(self): 
+    def test_a_redirect_banner(self): 
         # steps
         browser = self.browser #buka web browser
         browser.get("https://demoqa.com/") # buka situs
@@ -23,7 +23,7 @@ class TestElements(unittest.TestCase):
         print("The current url is:",get_url)
         self.assertEqual((get_url), 'https://www.toolsqa.com/selenium-training/')
 
-    def b_submit_textbox(self): 
+    def test_b_submit_textbox(self): 
         # steps
         browser = self.browser #buka web browser
         browser.get("https://demoqa.com/text-box") # buka situs
@@ -50,7 +50,7 @@ class TestElements(unittest.TestCase):
         self.assertEqual(response_data_currentAddress, 'Current Address :Jl. rumah no 1')
 
     
-    def c_add_webTable(self): 
+    def test_c_add_webTable(self): 
         # steps
         browser = self.browser #buka web browser
         browser.get("https://demoqa.com/webtables") # buka situs
@@ -94,7 +94,7 @@ class TestElements(unittest.TestCase):
         self.assertEqual(colSalary, '1000')
         self.assertEqual(colDepartment, 'PQA')
 
-    def d_delete_webTable(self): 
+    def test_d_delete_webTable(self): 
 
         def cek_sizeTable() :
             odd_row = browser.find_elements(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div/div[@class='rt-tr -odd']")
@@ -119,15 +119,15 @@ class TestElements(unittest.TestCase):
         #     print('check value sudah kosong after delete')
         #     self.assertEqual(value, ' ')
     
-    def test_e_checkbox(self) :
-        browser = self.browser #buka web browser
-        browser.get("https://demoqa.com/checkbox") # buka situs
+    # def test_e_checkbox(self) :
+    #     browser = self.browser #buka web browser
+    #     browser.get("https://demoqa.com/checkbox") # buka situs
 
-        browser.find_element(By.XPATH,"//div[@id='tree-node']/ol/li/span/label/span[@class='rct-checkbox']").click()
+    #     browser.find_element(By.XPATH,"//div[@id='tree-node']/ol/li/span/label/span[@class='rct-checkbox']").click()
 
-        element = browser.find_elements(By.CSS_SELECTOR,"[for='tree-node-documents'] .rct-icon-check")
+    #     element = browser.find_elements(By.CSS_SELECTOR,"[for='tree-node-documents'] .rct-icon-check")
 
-        element.get_attribute('svg')
+    #     element.get_attribute('svg')
 
 
     
