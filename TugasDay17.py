@@ -1,3 +1,5 @@
+from ctypes.wintypes import PINT
+from distutils.core import setup
 import unittest
 import time
 from selenium import webdriver 
@@ -79,12 +81,13 @@ class TestElements(unittest.TestCase):
         browser.find_element(By.ID,"submit").click() # 
         time.sleep(1)
 
-        colFirtName = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[1]").text
-        colLastName = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[2]").text
-        colAge = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[3]").text
-        colEmail = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[4]").text
-        colSalary = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[5]").text
-        colDepartment = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[6]").text
+        for i in range(7) :
+            colFirtName = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[1]").text
+            colLastName = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[2]").text
+            colAge = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[3]").text
+            colEmail = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[4]").text
+            colSalary = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[5]").text
+            colDepartment = browser.find_element(By.XPATH,"//div[@id='app']/div[@class='body-height']//div[@role='grid']/div[@class='rt-tbody']/div[4]/div[@role='row']/div[6]").text
 
         # validasi
         self.assertEqual(colFirtName, 'Arini')
@@ -119,18 +122,20 @@ class TestElements(unittest.TestCase):
         #     print('check value sudah kosong after delete')
         #     self.assertEqual(value, ' ')
     
-    # def test_e_checkbox(self) :
-    #     browser = self.browser #buka web browser
-    #     browser.get("https://demoqa.com/checkbox") # buka situs
+    def test_e_checkbox(self) :
+        browser = self.browser #buka web browser
+        browser.get("https://demoqa.com/radio-button") # buka situs
 
-    #     browser.find_element(By.XPATH,"//div[@id='tree-node']/ol/li/span/label/span[@class='rct-checkbox']").click()
+        for i in range(2) :
+            radio_button = browser.find_element(By.CSS_SELECTOR,".custom-control:nth-child("+str(i+2)+") > .custom-control-label")
+            radio_button.click()
+            time.sleep(2)
 
-    #     element = browser.find_elements(By.CSS_SELECTOR,"[for='tree-node-documents'] .rct-icon-check")
+            selected_text = browser.find_element(By.CSS_SELECTOR,".custom-control:nth-child("+str(i+2)+") > .custom-control-label").text
+            time.sleep(2)
+            print(selected_text)  
 
-    #     element.get_attribute('svg')
-
-
-    
+            self.assertEqual(browser.find_element(By.CSS_SELECTOR,".text-success").text, selected_text)    
 
     def tearDown(self): 
         self.browser.close() 
